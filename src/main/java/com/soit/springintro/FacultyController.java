@@ -1,6 +1,7 @@
 package com.soit.springintro;
 
-import com.soit.springintro.model.Faculty;
+import com.soit.springintro.entity.Faculty;
+import com.soit.springintro.service.FacultyService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,30 +15,18 @@ import java.util.List;
 @RequestMapping("/Faculties")
 public class FacultyController {
 
-    // Upload Faculty Info
-    private List<Faculty> theFaculties;
+    public FacultyService facultyService;
 
-    @PostConstruct
-    private void loadData() {
-
-        // Create Faculties
-        Faculty fac1 = new Faculty(1, "Kelly", "Miller", "Assistant Professor", "Kelly@uc.edu");
-        Faculty fac2 = new Faculty(2, "Robert", "Lee", "Instructor Educator", "Robert@uc.edu");
-        Faculty fac3 = new Faculty(3, "Laura", "West", "Adjunct- Professor", "Laura@uc.edu");
-
-        // Create our List
-        theFaculties = new ArrayList<>();
-
-        // Add to our List
-        theFaculties.add(fac1);
-        theFaculties.add(fac2);
-        theFaculties.add(fac3);
-
+    public FacultyController (FacultyService theFacultyService){
+        facultyService = theFacultyService;
     }
 
     // Mapping for "/List"
     @GetMapping("/list")
     public String listFaculties(Model theModel) {
+
+        // Retrieve faculties from the database
+        List<Faculty> theFaculties = facultyService.findAll();
 
         // Add faculties to the model
         theModel.addAttribute("faculties", theFaculties);
