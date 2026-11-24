@@ -24,6 +24,7 @@
                     <th>Last Name</th>
                     <th>Title</th>
                     <th>Email</th>
+                    <th>Update Info</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,22 @@
                     <td th:text="${theFaculty.lastName}"></td>
                     <td th:text="${theFaculty.title}"></td>
                     <td th:text="${theFaculty.email}"></td>
+
+                    <!--Action Buttons-->
+                    <td>
+                        <!--Update-->
+                        <a th:href="@{/Faculties/viewUpdateForm(facultyId=${theFaculty.id})}"
+                           class="btn btn-light btn-sm">
+                            Update
+                        </a>
+
+                        <!--Delete-->
+                        <a th:href="@{/Faculties/delete(facultyId=${theFaculty.id})}"
+                           onClick="if (!(confirm('To confirm deletion, please click OK; otherwise, click Cancel'))) return false"
+                           class="btn btn-danger btn-sm">
+                            Delete
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
