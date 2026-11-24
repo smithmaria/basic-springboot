@@ -2,13 +2,13 @@ package com.soit.springintro;
 
 import com.soit.springintro.entity.Faculty;
 import com.soit.springintro.service.FacultyService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,7 +31,28 @@ public class FacultyController {
         // Add faculties to the model
         theModel.addAttribute("faculties", theFaculties);
 
-        return "list-faculties";
+        return "faculties/list-faculties";
+    }
+
+    @GetMapping("/viewAddForm")
+    public String viewAddForm(Model theModel){
+
+        //Create a new Faculty object for form binding
+        Faculty theFaculty = new Faculty();
+
+        theModel.addAttribute("faculty", theFaculty);
+
+        return "faculties/faculty-form";
+    }
+
+    @PostMapping("/save")
+    public String saveFaculty(@ModelAttribute("faculty") Faculty theFaculty){
+
+        // Register the Faculty
+        facultyService.save(theFaculty);
+
+        //Block duplicate submission for accidental refresh
+        return "redirect:/Faculties/list";
     }
 
 }

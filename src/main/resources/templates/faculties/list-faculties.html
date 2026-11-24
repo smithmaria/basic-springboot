@@ -14,8 +14,10 @@
 <div class="container">
     <h4>School of IT Faculty Director</h4>
     <hr/>
-    <body>
-        <table class="table table-bordered">
+        <!--Create a button to add a new Faculty-->
+        <a th:href="@{/Faculties/viewAddForm}" class="btn btn-dark btn-sm mb-2">Add New Faculty Here</a>
+
+        <table class="table table-dark">
             <thead>
                 <tr class="bg-danger">
                     <th>First Name</th>
@@ -33,6 +35,5 @@
                 </tr>
             </tbody>
         </table>
-    </body>
 </div>
 </html>

@@ -25,12 +25,12 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public Faculty findById(int theId) {
-        return null;
+        return facultyRepository.findById(theId).get();
     }
 
     @Override
     public void save(Faculty theFaculty) {
-
+        facultyRepository.save(theFaculty);
     }
 
     @Override
